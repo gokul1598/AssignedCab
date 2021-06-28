@@ -1,0 +1,9 @@
+server:  port: 5050
+
+
+Spring:
+  data:
+    mongodb:
+      host: localhost
+      database: test
+      port: 27017      

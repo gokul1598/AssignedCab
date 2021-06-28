@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>AssignedCab</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+    <form action="#">
+    
+        
+        cabNumber: <input type="text" id="cabnumber" />
+        driverName: <input type="text" id="name" />
+        driverNumber: <input type="number" id="number" />
+        source: <input type="text" id="source" />
+        destination: <input type="text" id="destination" />
+       timeSlot: <input type="text" id="time" />
+        
+        <input type="submit" value="submit" id="submitBtn"/>
+        <input type="submit" value="AssignedCab" id="submitBtn2"/>
+<input type="submit" value="filter" id="submitBtn3"/>
+    </form>
+     <div id="cabs"></div>
+     
+    <div>
+      <label> Source</label>
+        <select id="sourcelist" >
+          <option >source</option>
+        </select>
+   </div>
+    
+    
+    <div>
+      <label>Destination</label>
+      <select id="destinationlist" >
+         <option >Destination</option>
+      </select>
+   </div>
+   <script type="text/javascript" >  
+   var xhr = new XMLHttpRequest();
+   
+   var submitBtn = document.getElementById("submitBtn");
+   
+
+ //var source= document.getElementById("source");
+   
+   var submitBtn2 = document.getElementById("submitBtn2");
+   
+   submitBtn.addEventListener('click',function(){
+       
+       event.preventDefault();
+       
+       
+       var cabNumber = document.getElementById("cabnumber").value;
+       var name = document.getElementById("name").value;
+       var number = document.getElementById("number").value;
+       var source = document.getElementById("source").value;
+       var destination = document.getElementById("destination").value;
+       var timeSlot = document.getElementById("time").value;
+       
+       var cabs = {"cabNumber":cabNumber,"driverName":name,"driverNumber":number,"source":source,"destination":destination,"timeSlot":timeSlot};
+       
+       var url = "http://localhost:5050/api/v1/assignedCab";
+       
+       xhr.open("POST",url,true);
+       
+         xhr.onreadystatechange=processResponse;
+
+
+
+         xhr.setRequestHeader("Content-Type", "application/json");
+         
+         xhr.send(JSON.stringify(cabs));
+   
+   });
+   
+   function processResponse(){
+       
+       if(xhr.readyState == 4 && xhr.status == 201)
+           {
+              var response = xhr.responseText;
+              alert("cabAssigned added successfully");
+              
+           }
+       
+   }
+   
+  
+   submitBtn2.addEventListener('click',function(){
+       
+       event.preventDefault();
+       
+        xhr.open("GET","http://localhost:5050/api/v1/assignedCab/cabs",true);
+         xhr.onreadystatechange=processResponse2;
+        
+
+
+         xhr.send(null);
+       
+   
+   });
+   function processResponse2(){
+       
+       if(xhr.readyState == 4 && xhr.status == 200)
+           {
+            
+    	   $("#cabs").empty();
+              var arr = JSON.parse(xhr.responseText);
+
+   for(var i=0;i<arr.length; i++){
+       
+       
+       var divObj = document.createElement('div');
+       var divObj1 = document.createElement('div');
+       var divObj2 = document.createElement('div');
+       var divObj3 = document.createElement('div');
+       var divObj4 = document.createElement('div');
+       var divObj5 = document.createElement('div');
+       divObj.innerText = arr[i].cabNumber ;
+       divObj1.innerText = arr[i].driverName;
+       divObj2.innerText = arr[i].driverNumber;
+       divObj3.innerText = arr[i].source;
+       divObj4.innerText = arr[i].destination;
+       divObj5.innerText = arr[i].timeSlot;
+       document.getElementById("cabs").appendChild(divObj);
+       document.getElementById("cabs").appendChild(divObj1);
+       document.getElementById("cabs").appendChild(divObj2);
+       document.getElementById("cabs").appendChild(divObj3);
+       document.getElementById("cabs").appendChild(divObj4);
+       document.getElementById("cabs").appendChild(divObj5);
+   }
+           }
+   }
+   var xhr = new XMLHttpRequest();
+   var submitBtn3 = document.getElementById("submitBtn3");
+   submitBtn3.addEventListener('click',function(){
+      // window.onload=function(){
+    	   event.preventDefault();
+    	   xhr.open("GET","http://localhost:5050/api/v1/sourcelist",true);
+    	   xhr.onreadystatechange=processResponse3;
+    	   xhr.send(null);
+       });
+       function processResponse3(){
+    	   
+           if(xhr.readyState == 4 && xhr.status == 200)
+               {
+       //to clear the existing dropdown values - begin
+        	   //java script -- method
+        	
+//         	   var sourcelist= document.getElementById("sourcelist");
+//                var length = sourcelist.options.length;
+//                for (i = length-1; i >= 0; i--) {
+//                  sourcelist.options[i] = null;
+//                }
+     //to clear the existing dropdown values - end  
+              // JQuery --method
+                   //  $("#sourcelist").empty();
+              
+                  var arr = JSON.parse(xhr.responseText);
+               
+                  for(var i=0;i<arr.length; i++){
+                  
+                var op= document.createElement("option");
+                op.innerHTML= arr[i].source;
+                document.getElementById("sourcelist").options.add(op);
+               }
+
+               }
+       }
+var xhr1 = new XMLHttpRequest();
+       
+       //window.onload=function(){
+    	   var submitBtn3 = document.getElementById("submitBtn3");
+   
+   submitBtn3.addEventListener('click',function(){
+    	   event.preventDefault();
+    	   xhr1.open("GET","http://localhost:5050/api/v1/destinationlist",true);
+    	   xhr1.onreadystatechange=processResponse4;
+    	   xhr1.send(null);
+       });
+       function processResponse4(){
+    	   
+           if(xhr1.readyState == 4 && xhr1.status == 200)
+               {
+     
+              
+                  var arr = JSON.parse(xhr1.responseText);
+               
+                  for(var i=0;i<arr.length; i++){
+                  
+                var des= document.createElement("option");
+                des.innerHTML= arr[i].destination;
+                document.getElementById("destinationlist").options.add(des);
+               }
+
+               }
+     
+       }
+   
+          
+   
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+   

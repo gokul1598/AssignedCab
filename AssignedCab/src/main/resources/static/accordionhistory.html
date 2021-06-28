@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <meta charset ='utf-8'>
+        <title>Capital Planning System</title>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="css/commontheme.css">
+    </head>
+    <body>
+       <!--nav starts-->
+       <div class="container-fluid">
+        <div class="row">
+      <div class="col-md-12 topnav-border">
+        <div class="float-start">
+             <a class="cab-logo" href="cabadmin.html"><img src="images/cab-logo.svg" class="cabapp-logo" alt="logo"></a>
+          </div>
+          <div class="float-start">
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item nav-menu"><a class="link nav-align-tabs" href="cabadmin.html">Manage Requests And Cabs</a></li>
+                <li class="list-group-item nav-menu"><a class="link requests requests-tabactive" href="history.html">History of Trips</a></li>
+                <li class="list-group-item nav-menu"><a class="link nav-align-tabs" href="complaints.html">Complaints</a></li>
+                <li class="list-group-item nav-menu"><a class="link nav-align-tabs" href="Blockedusers.html">Blocked Users</a></li>
+                <li class="list-group-item nav-menu"><a class="link nav-align-tabs " href="routemanagement.html">Route Management</a></li>
+             </ul>
+            </div>
+            <div class="float-end">
+              <!--notification starts-->
+              <div class="float-start">
+                <div class="header-right">
+                  <div class="dropdown col-md-12 float-start">
+                      <img class="cursor" src="images/notify.svg" alt="notify-icon" title="notifications"  data-toggle="dropdown" aria-expanded="true">
+                  <div class="dropdown-menu m-0 p-3 notify-filter" >
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 pb-2 border-0 mb-3"><span class="text-style-title h-size3">Notification</span>
+                              <button type="button" class="btn-close float-end close-filter" data-dismiss="notify-filter" aria-label="Close">
+                            </button>
+                            </div>
+                            
+                             <div class="col-md-12">
+                              <div class="row mb-3">
+                                      <div class=" col-md-12 float-start topnav-border">
+                                          <img src="images/success.svg" class="notification-icon float-start" alt="notifyicon">
+                                          <p class="float-start notification-content">TN 12 W 3243 Trip ended<br>
+                                          <span class="color">Succesfully</span></p>
+                                        </div>
+                                      <div class="float-end">
+                                          <h6 class="notification-time float-end ">Just now</h6>
+                                        </div>
+                                  </div>
+                                  
+                                  <div>
+                                      <div class=" col-md-12 float-start topnav-border">
+                                          <img src="images/comp-red.svg" class="notification-icon float-start" alt="notifyicon">
+                                          <p class="float-start notification-content">1234 Nithya Raised a<br>
+                                            <span class="color1">Compliant</span></p>
+                                        </div>
+                                          <div class="float-end" >
+                                            <h6 class="notification-time float-end ">Just now</h6>
+                                          </div>
+                                  </div>
+                                 
+                                 <div>
+                                    <div class=" col-md-12 mt-3 ">
+                                        <div class="col-md-6 float-start notify-space">
+                                          <h6>2 Notifications</h6>
+                                        </div>
+                                        <div class="col-md-6 float-end notify-space1">
+                                           <a href="#" class="float-end">Clear All</a>
+                                        </div>
+                                       </div>
+                                 </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            <!--notification here-->
+
+            <!--user profile starts-->
+            <div class="float-end">
+              <div class="header-right">
+                <div class="dropdown col-md-12 float-start">
+                    <img class="cursor navuserprofile-icons" src="images/user-profile.svg" alt="user-icon" title="User Profile"  data-toggle="dropdown" aria-expanded="true"/>
+                <div class="dropdown-menu m-0 p-3 user-filter" >
+                  <div class="container-fluid">
+                      <div class="row">
+                          <div class="col-md-12 pb-2 border-0 mb-3">
+                            <button type="button" class="btn-close float-end close-filter" data-dismiss="user-filter" aria-label="Close">
+                          </button>
+                          </div>
+                        
+                           <div class="col-md-12">
+                           
+                            <div class="col-md-4 float-start">
+                              <img src="images/user-icon-image.svg" class="user-profile-icon" alt="profileicon">
+                          </div>
+                              <div class="col-md-4 float-start">
+                                <h5 class="userprofile-content pt-2">Raghavan Govind</h5>
+                                <h5 class="userprofile-content1  pt-2">raghavan.g@avasoft.com</h5>
+                                <button type="button" class="btnlogoutbtn mb-3 ">Logout</button>
+                            
+                            
+                          
+                              </div>
+                                   
+                           </div>
+                            </div>
+                            </div>
+                          
+                        
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                 <!--user profile ends-->
+
+                  <!--nav ends-->
+        <div class="parent-container mt-2 mb-3 px-lg-5"><!--this is my parent container-->
+        <div class="col-md-12">
+            <a href="#"><img class="float-start img-back" src="images/back.svg" title="back" alt="back"/></a> 
+            <h2 class="h-size1 float-start mb-3">Trip History</h2>
+        </div>
+        </div>
+        <!--accordion tab1 starts here-->
+        <div class="col-md-11 mb-4 mt-2 accord float-start">
+          <div class="row">
+            <div id="accordion">
+              <div class="card accordion-card">
+                <div class="card-header accordion-card-header accord-head" id="headingOne">
+                  <h5 class="mb-0">
+                    <span class="accordion-heading accordion-headertxt-style collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">       
+                      <span class="h-size2 float-end">Date of Travel:04/04/2021</span><span class="accordion-icon"></span><span class="h-size3 float-start px-2 mb-4">Trip Sheet 1</span>
+                    </span>
+                  </h5>
+                </div>
+          
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body accordion-body p-0 w-100 float-start">
+
+                     <!---content-->
+               <div class="col-md-12 mb-4 float-start w-100 p-0">
+                <table class="table">
+                  <thead>
+                    <tr class="display-shadow">
+                      <th class="header-class">SL.No</th>
+                      <th class="header-class">Employee Id</th>
+                      <th class="header-class">Employee Name</th>
+                      <th class="header-class">Drop Point</th>
+                      <th class="header-class">Reached Time</th>
+                      <th class="header-class">Status</th>
+                    </tr>
+                    </thead>
+                  <tbody>
+                      <tr class="row-bg-style">
+                          <td class="spacing1">01</td>
+                          <td class="spacing1">1234</td>
+                          <td class="spacing1">Nithya</td>
+                          <td class="spacing1">AGS</td>
+                          <td class="spacing1">10:15 PM</td>
+                          <td class="spacing1"><button class="round"></button>Reached</td>
+                      </tr>
+                        <tr class="row-bg-style">
+                          <td class="spacing1">02</td>
+                          <td class="spacing1">1235</td>
+                          <td class="spacing1">Mani</td>
+                           <td class="spacing1">Sirucheri</td>
+                          <td class="spacing1">10:15 PM</td>
+                          <td class="spacing1"><button class="round"></button>Reached</td>
+                      </tr>
+                        <tr class="row-bg-style">
+                          <td class="spacing1">03</td>
+                          <td class="spacing1">1236</td>
+                          <td class="spacing1">Vishwa</td>
+                          <td class="spacing1">Dollar</td>
+                          <td class="spacing1">10:16 PM</td>
+                          <td class="spacing1"><button class="round"></button>Reached</td>
+                      </tr>
+                        <tr class="row-bg-style">
+                          <td class="spacing1">04</td>
+                          <td class="spacing1">1237</td>
+                          <td class="spacing1">Rubin</td>
+                          <td class="spacing1">KK Nagar</td>
+                        <td class="spacing1">-</td>
+                        <td class="spacing1"><button class="round1"></button>No Show</td>
+                      </tr>
+                        <tr class="row-bg-style">
+                          <td class="spacing1">05</td>
+                          <td class="spacing1">1238</td>
+                          <td class="spacing1">Rohith</td>
+                          <td class="spacing1">Rajiv Nagar</td>
+                          <td class="spacing1">10:17 PM</td>
+                          <td class="spacing1"><button class="round"></button>Reached</td>
+                      </tr>
+                      <tr class="row-bg-style">
+                          <td class="spacing1">06</td>
+                          <td class="spacing1">1239</td>
+                          <td class="spacing1">Saro</td>
+                          <td class="spacing1">Medavakkam</td>
+                          <td class="spacing1">10:20 PM</td>
+                          <td class="spacing1"><button class="round"></button>Reached</td>
+                      </tr>
+                        </tbody>
+                  </table>
+            <!--content ends-->
+            
+            </div>
+            
+                </div>
+              </div>
+            </div>
+       
+           
+            </div>
+      </div> 
+      </div>
+      <!-- Accordion tab1 ends Here-->
+
+      <!--accordion tab2 starts here-->
+      <div class="col-md-11 mb-4 mt-2 accord float-start">
+        <div class="row">
+          <div id="accordion1">
+            <div class="card accordion-card">
+              <div class="card-header accordion-card-header accord-head" id="heading2">
+                <h5 class="mb-0">
+                  <span class="accordion-heading accordion-headertxt-style collapsed" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false" aria-controls="collapseOne">         
+                    <span class="h-size2 float-end">Date of Travel:04/04/2021</span><span class="accordion-icon"></span><span class="h-size3 float-start px-2 mb-4">Trip Sheet 2</span>
+                  </span>
+                </h5>
+              </div>
+        
+              <div id="collapsetwo" class="collapse" aria-labelledby="heading2" data-parent="#accordion1">
+                <div class="card-body accordion-body p-0 w-100 float-start">
+
+                   <!---content-->
+             <div class="col-md-12 mb-4 float-start w-100 p-0">
+              <table class="table">
+                <thead>
+                  <tr class="display-shadow">
+                    <th class="header-class">SL.No</th>
+                    <th class="header-class">Employee Id</th>
+                    <th class="header-class">Employee Name</th>
+                    <th class="header-class">Drop Point</th>
+                    <th class="header-class">Reached Time</th>
+                    <th class="header-class">Status</th>
+                  </tr>
+                  </thead>
+                <tbody>
+                    <tr class="row-bg-style">
+                        <td class="spacing1">01</td>
+                        <td class="spacing1">1234</td>
+                        <td class="spacing1">Nithya</td>
+                        <td class="spacing1">AGS</td>
+                        <td class="spacing1">10:15 PM</td>
+                        <td class="spacing1"><button class="round"></button>Reached</td>
+                    </tr>
+                      <tr class="row-bg-style">
+                        <td class="spacing1">02</td>
+                        <td class="spacing1">1235</td>
+                        <td class="spacing1">Mani</td>
+                         <td class="spacing1">Sirucheri</td>
+                        <td class="spacing1">10:15 PM</td>
+                        <td class="spacing1"><button class="round"></button>Reached</td>
+                    </tr>
+                      <tr class="row-bg-style">
+                        <td class="spacing1">03</td>
+                        <td class="spacing1">1236</td>
+                        <td class="spacing1">Vishwa</td>
+                        <td class="spacing1">Dollar</td>
+                        <td class="spacing1">10:16 PM</td>
+                        <td class="spacing1"><button class="round"></button>Reached</td>
+                    </tr>
+                      <tr class="row-bg-style">
+                        <td class="spacing1">04</td>
+                        <td class="spacing1">1237</td>
+                        <td class="spacing1">Rubin</td>
+                        <td class="spacing1">KK Nagar</td>
+                      <td class="spacing1">-</td>
+                      <td class="spacing1"><button class="round1"></button>No Show</td>
+                    </tr>
+                      <tr class="row-bg-style">
+                        <td class="spacing1">05</td>
+                        <td class="spacing1">1238</td>
+                        <td class="spacing1">Rohith</td>
+                        <td class="spacing1">Rajiv Nagar</td>
+                        <td class="spacing1">10:18 PM</td>
+                        <td class="spacing1"><button class="round"></button>Reached</td>
+                    </tr>
+                    <tr class="row-bg-style">
+                        <td class="spacing1">06</td>
+                        <td class="spacing1">1239</td>
+                        <td class="spacing1">Saro</td>
+                        <td class="spacing1">Medavakkam</td>
+                        <td class="spacing1">10:20 PM</td>
+                        <td class="spacing1"><button class="round"></button>Reached</td>
+                    </tr>
+                      </tbody>
+                </table>
+          <!--content ends-->
+          
+          </div>
+          
+              </div>
+            </div>
+          </div>
+     
+         
+          </div>
+    </div> 
+    </div>
+    <!-- Accordion tab2 ends Here-->
+    <!--accordion tab3 starts here-->
+    <div class="col-md-11 mb-4 mt-2 accord float-start">
+      <div class="row">
+        <div id="accordion2">
+          <div class="card accordion-card">
+            <div class="card-header accordion-card-header accord-head" id="heading3">
+              <h5 class="mb-0">
+                <span class="accordion-heading accordion-headertxt-style collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapseOne">         
+                  <span class="h-size2 float-end">Date of Travel:04/04/2021</span><span class="accordion-icon"></span><span class="h-size3 float-start px-2 mb-4">Trip Sheet 3</span>
+                </span>
+              </h5>
+            </div>
+      
+            <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordion2">
+              <div class="card-body accordion-body p-0 w-100 float-start">
+
+                 <!---content-->
+           <div class="col-md-12 mb-4 float-start w-100 p-0">
+            <table class="table">
+              <thead>
+                <tr class="display-shadow">
+                  <th class="header-class">SL.No</th>
+                  <th class="header-class">Employee Id</th>
+                  <th class="header-class">Employee Name</th>
+                  <th class="header-class">Drop Point</th>
+                  <th class="header-class">Reached Time</th>
+                  <th class="header-class">Status</th>
+                </tr>
+                </thead>
+              <tbody>
+                  <tr class="row-bg-style">
+                      <td class="spacing1">01</td>
+                      <td class="spacing1">1234</td>
+                      <td class="spacing1">Nithya</td>
+                      <td class="spacing1">AGS</td>
+                      <td class="spacing1">10:15 PM</td>
+                      <td class="spacing1"><button class="round"></button>Reached</td>
+                  </tr>
+                    <tr class="row-bg-style">
+                      <td class="spacing1">02</td>
+                      <td class="spacing1">1235</td>
+                      <td class="spacing1">Mani</td>
+                       <td class="spacing1">Sirucheri</td>
+                      <td class="spacing1">10:15 PM</td>
+                      <td class="spacing1"><button class="round"></button>Reached</td>
+                  </tr>
+                    <tr class="row-bg-style">
+                      <td class="spacing1">03</td>
+                      <td class="spacing1">1236</td>
+                      <td class="spacing1">Vishwa</td>
+                      <td class="spacing1">Dollar</td>
+                      <td class="spacing1">10:16 PM</td>
+                      <td class="spacing1"><button class="round"></button>Reached</td>
+                  </tr>
+                    <tr class="row-bg-style">
+                      <td class="spacing1">04</td>
+                      <td class="spacing1">1237</td>
+                      <td class="spacing1">Rubin</td>
+                      <td class="spacing1">KK Nagar</td>
+                    <td class="spacing1">-</td>
+                    <td class="spacing1"><button class="round1"></button>No Show</td>
+                  </tr>
+                    <tr class="row-bg-style">
+                      <td class="spacing1">05</td>
+                      <td class="spacing1">1238</td>
+                      <td class="spacing1">Rohith</td>
+                      <td class="spacing1">Rajiv Nagar</td>
+                      <td class="spacing1">10:18 PM</td>
+                      <td class="spacing1"><button class="round"></button>Reached</td>
+                  </tr>
+                  <tr class="row-bg-style">
+                      <td class="spacing1">06</td>
+                      <td class="spacing1">1239</td>
+                      <td class="spacing1">Saro</td>
+                      <td class="spacing1">Medavakkam</td>
+                      <td class="spacing1">10:20 PM</td>
+                      <td class="spacing1"><button class="round"></button>Reached</td>
+                  </tr>
+                    </tbody>
+              </table>
+        <!--content ends-->
+        
+        </div>
+        
+            </div>
+          </div>
+        </div>
+   
+       
+        </div>
+  </div> 
+  </div>
+  <!-- Accordion tab3 ends Here-->
+  <!--accordion tab4 starts here-->
+  <div class="col-md-11 mb-4 mt-2 accord float-start">
+    <div class="row">
+      <div id="accordion3">
+        <div class="card accordion-card">
+          <div class="card-header accordion-card-header accord-head" id="heading4">
+            <h5 class="mb-0">
+              <span class="accordion-heading accordion-headertxt-style collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapseOne">         
+                <span class="h-size2 float-end">Date of Travel:04/04/2021</span><span class="accordion-icon"></span><span class="h-size3 float-start px-2 mb-4">Trip Sheet 4</span>
+              </span>
+            </h5>
+          </div>
+    
+          <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion3">
+            <div class="card-body accordion-body p-0 w-100 float-start">
+
+               <!---content-->
+         <div class="col-md-12 mb-4 float-start w-100 p-0">
+          <table class="table">
+            <thead>
+              <tr class="display-shadow">
+                <th class="header-class">SL.No</th>
+                <th class="header-class">Employee Id</th>
+                <th class="header-class">Employee Name</th>
+                <th class="header-class">Drop Point</th>
+                <th class="header-class">Reached Time</th>
+                <th class="header-class">Status</th>
+              </tr>
+              </thead>
+            <tbody>
+                <tr class="row-bg-style">
+                    <td class="spacing1">01</td>
+                    <td class="spacing1">1234</td>
+                    <td class="spacing1">Nithya</td>
+                    <td class="spacing1">AGS</td>
+                    <td class="spacing1">10:15 PM</td>
+                    <td class="spacing1"><button class="round"></button>Reached</td>
+                </tr>
+                  <tr class="row-bg-style">
+                    <td class="spacing1">02</td>
+                    <td class="spacing1">1235</td>
+                    <td class="spacing1">Mani</td>
+                     <td class="spacing1">Sirucheri</td>
+                    <td class="spacing1">10:15 PM</td>
+                    <td class="spacing1"><button class="round"></button>Reached</td>
+                </tr>
+                  <tr class="row-bg-style">
+                    <td class="spacing1">03</td>
+                    <td class="spacing1">1236</td>
+                    <td class="spacing1">Vishwa</td>
+                    <td class="spacing1">Dollar</td>
+                    <td class="spacing1">10:16 PM</td>
+                    <td class="spacing1"><button class="round"></button>Reached</td>
+                </tr>
+                  <tr class="row-bg-style">
+                    <td class="spacing1">04</td>
+                    <td class="spacing1">1237</td>
+                    <td class="spacing1">Rubin</td>
+                    <td class="spacing1">KK Nagar</td>
+                  <td class="spacing1">10:20 PM</td>
+                  <td class="spacing1"><button class="round"></button>Reached</td>
+                </tr>
+                  <tr class="row-bg-style">
+                    <td class="spacing1">05</td>
+                    <td class="spacing1">1238</td>
+                    <td class="spacing1">Rohith</td>
+                    <td class="spacing1">Rajiv Nagar</td>
+                    <td class="spacing1">-</td>
+                    <td class="spacing1"><button class="round1"></button>No Show</td>
+                </tr>
+                <tr class="row-bg-style">
+                    <td class="spacing1">06</td>
+                    <td class="spacing1">1239</td>
+                    <td class="spacing1">Saro</td>
+                    <td class="spacing1">Medavakkam</td>
+                    <td class="spacing1">-</td>
+                    <td class="spacing1"><button class="round1"></button>No show</td>
+                </tr>
+                  </tbody>
+            </table>
+      <!--content ends-->
+      
+      </div>
+      
+          </div>
+        </div>
+      </div>
+ 
+     
+      </div>
+</div> 
+</div>
+<!-- Accordion tab4 ends Here-->
+
+
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+             </script>
+                
+            </body>
+          </html>       

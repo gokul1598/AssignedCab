@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset='utf-8'>
+  <title>Capital Planning System</title>
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="css/commontheme.css">
+</head>
+
+<body>
+  <!--nav starts-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 topnav-border">
+        <div class="float-start">
+          <a class="cab-logo" href="cabadmin.html"><img src="images/cab-logo.svg" class="cabapp-logo" alt="logo"></a>
+        </div>
+        <div class="float-start">
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item nav-menu"><a class="link nav-align-tabs" href="cabadmin.html">Manage Requests And Cabs</a>
+            </li>
+            <li class="list-group-item nav-menu"><a class="link nav-align-tabs" href="history.html">History of Trips</a></li>
+            <li class="list-group-item nav-menu"><a class="link requests requests-tabactive" href="complaints.html">Complaints</a>
+            </li>
+            <li class="list-group-item nav-menu"><a class="link nav-align-tabs" href="Blockedusers.html">Blocked Users</a></li>
+            <li class="list-group-item nav-menu"><a class="link nav-align-tabs" href="routemanagement.html">Route Management</a></li>
+          </ul>
+        </div>
+        <div class="float-end">
+          <!--notification starts-->
+          <div class="float-start">
+            <div class="header-right">
+              <div class="dropdown col-md-12 float-start">
+                <img class="cursor" src="images/notify.svg" alt="notify-icon" title="notifications"
+                  data-toggle="dropdown" aria-expanded="true">
+                <div class="dropdown-menu m-0 p-3 notify-filter">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12 pb-2 border-0 mb-3"><span
+                          class="text-style-title h-size3">Notification</span>
+                        <button type="button" class="btn-close float-end close-filter" data-dismiss="notify-filter"
+                          aria-label="Close">
+                        </button>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row mb-3">
+                          <div class=" col-md-12 float-start topnav-border">
+                            <img src="images/success.svg" class="notification-icon float-start" alt="notifyicon">
+                            <p class="float-start notification-content">TN 12 W 3243 Trip ended<br>
+                              <span class="color">Succesfully</span>
+                            </p>
+                          </div>
+                          <div class="float-end">
+                            <h6 class="notification-time float-end ">Just now</h6>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div class=" col-md-12 float-start topnav-border">
+                            <img src="images/comp-red.svg" class="notification-icon float-start" alt="notifyicon">
+                            <p class="float-start notification-content">1234 Nithya Raised a<br>
+                              <span class="color1">Compliant</span>
+                            </p>
+                          </div>
+                          <div class="float-end">
+                            <h6 class="notification-time float-end ">Just now</h6>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div class=" col-md-12 mt-3 ">
+                            <div class="col-md-6 float-start notify-space">
+                              <h6>2 Notifications</h6>
+                            </div>
+                            <div class="col-md-6 float-end notify-space1">
+                              <a href="#" class="float-end">Clear All</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--notification here-->
+
+          <!--user profile starts-->
+          <div class="float-end">
+            <div class="header-right">
+              <div class="dropdown col-md-12 float-start">
+                <img class="cursor navuserprofile-icons" src="images/user-profile.svg" alt="user-icon"
+                  title="User Profile" data-toggle="dropdown" aria-expanded="true" />
+                <div class="dropdown-menu m-0 p-3 user-filter">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12 pb-2 border-0 mb-3">
+                        <button type="button" class="btn-close float-end close-filter" data-dismiss="user-filter"
+                          aria-label="Close">
+                        </button>
+                      </div>
+
+                      <div class="col-md-12">
+
+                        <div class="col-md-4 float-start">
+                          <img src="images/user-icon-image.svg" class="user-profile-icon" alt="profileicon">
+                        </div>
+                        <div class="col-md-4 float-start">
+                          <h5 class="userprofile-content pt-2">Raghavan Govind</h5>
+                          <h5 class="userprofile-content1  pt-2">raghavan.g@avasoft.com</h5>
+                          <button type="button" class="btnlogoutbtn mb-3 ">Logout</button>
+
+
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--user profile ends-->
+
+  <!--nav ends-->
+  <div class="parent-container mt-2 mb-3 px-lg-3">
+    <!--this is my parent container-->
+    <h2 class="h-size1 float-start mb-3">Complaints</h2>
+    <div class="header-right1 float-end">
+      <div class="dropdown filt float-start">
+        <img class="cursor" src="images/Vector.svg" alt="filter-icon" title="Advanced Filter" data-toggle="dropdown"
+          aria-expanded="true" />
+        <div class="dropdown-menu m-0 p-3 advanced-filter">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12 pb-2 border-0 mb-3"><span class="text-style-title filter-title">Advanced
+                  Filter</span><button type="button" class="btn-close float-end" id="close-filter"
+                  data-dismiss="advanced-filter" aria-label="Close">
+
+                </button>
+              </div>
+              <div class="col-md-12">
+                <div class="row mb-3">
+
+                  <div class="col-md-6 mb-3">
+                    <label class="mb-0 form-label filter-style " for="Source">Source</label>
+                    <select class="form-select style-select1 border-filter-style" id="Source"
+                      aria-label="Default-example">
+                      <option selected>Select Source</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="mb-0 form-label filter-style " for="Destination">Destination</label>
+                    <select class="form-select style-select1 border-filter-style" id="Destination"
+                      aria-label="Default-example">
+                      <option selected>Select Destination</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="mb-0 form-label filter-style " for="Droppoint">Drop Point</label>
+                    <select class="form-select style-select1 border-filter-style" id="Droppoint"
+                      aria-label="Default-example">
+                      <option selected>Select Drop Point</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="mb-0 form-label filter-style " for="Timeslot">Time Slot</label>
+                    <select class="form-select style-select1 border-filter-style" id="Timeslot"
+                      aria-label="Default-example">
+                      <option selected>Select Time Slot</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+
+                </div>
+                <div class=" float-end">
+                  <button type="button" class="btn btn-primary btn-sm cancel-btn">Cancel</button>
+                  <button type="button" class="btn btn-primary btn-sm button1">Apply Filter</button>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--filter ends here-->
+      <!--search starts here-->
+      <div class="float-start me-3">
+        <div class="input-group flex-nowrap search-shadow">
+          <input type="text" class="form-control search-align" placeholder="Search" aria-label="Username"
+            aria-describedby="addon-wrapping">
+          <button class="input-group-text btn btn-search-custom" id="addon-wrapping"><img src="images/search.svg"
+              alt="search-icon"></button>
+        </div>
+      </div>
+      <!--search ends here-->
+    </div>
+  </div>
+  <!--table starts here-->
+  <div class="col-md-12 flt-lft  my-5 px-lg-3 tab">
+    <div class="tab-content border1 my-3" id="pills-tabContent">
+      <div class="col-md-12 float-start">
+        <table class="table mb-0">
+          <thead>
+            <tr class="display-shadow">
+              <th class="header-class1">Employee Id</th>
+              <th class="header-class1">Employee Name</th>
+              <th class="header-class1">Employee Number</th>
+              <th class="header-class1">Cab Number</th>
+              <th class="header-class1">Driver Name</th>
+              <th class="header-class1">Source <span class="sorting"><a class="sort-up" href="#"><img class="sort-image"
+                      src="images/sortup-icon.svg" alt="sort-up" /></a><a class="sort-down" href="#"><img
+                      class="sort-image" src="images/sortdown-icon.svg" alt="sort-down" /></a></span></th>
+              <th class="header-class1">Drop Point <span class="sorting"><a class="sort-up" href="#"><img
+                      class="sort-image" src="images/sortup-icon.svg" alt="sort-up" /></a><a class="sort-down"
+                    href="#"><img class="sort-image" src="images/sortdown-icon.svg" alt="sort-down" /></a></span></th>
+              <th class="header-class1">Date of Travel <span class="sorting"><a class="sort-up" href="#"><img
+                      class="sort-image" src="images/sortup-icon.svg" alt="sort-up" /></a><a class="sort-down"
+                    href="#"><img class="sort-image" src="images/sortdown-icon.svg" alt="sort-down" /></a></span></th>
+              <th class="header-class1">Time Slot <span class="sorting"><a class="sort-up" href="#"><img
+                      class="sort-image" src="images/sortup-icon.svg" alt="sort-up" /></a><a class="sort-down"
+                    href="#"><img class="sort-image" src="images/sortdown-icon.svg" alt="sort-down" /></a></span></th>
+              <th class="header-class1">Complaints</th>
+              <th class="header-class1">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-bg-style">
+              <td class="spacing2">1234</td>
+              <td class="spacing2">Nithya</td>
+              <td class="spacing2">7658493245</td>
+              <td class="spacing2">TN 12 H 3245</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Alpha city</td>
+              <td class="spacing2">AGS</td>
+              <td class="spacing2">04/04/2021</td>
+              <td class="spacing2">10:00 PM</td>
+              <td class="spacing2">Inappropriate Dressing</td>
+              <td class="spacing2">
+                <!--comment remarks starts here-->
+                <div class="dropdown">
+                  <a href="#" title="Remarks" class="align-img" data-toggle="dropdown" aria-expanded="false">
+                    <img class="cursor" src="images/remarks.svg" alt="remarks-icon" />
+                  </a>
+                  <div class="dropdown-menu m-0 p-3 user-filter">
+                    <div class="container-fluid">
+                      <div class="row">
+
+                        <div class="col-md-12 mb-3">
+                          <div class="col-md-12 pb-2 border-0 mb-3">
+                            <button type="button" class="btn-close float-end close-filter" data-dismiss="user-filter"
+                              aria-label="Close">
+                            </button>
+                          </div>
+                          <h5 class="h-size1 mb-2">Enter Remarks</h5>
+                          <input type="text" class="form-control border-filter-style" id="remarks">
+                        </div>
+                        <div class="col-md-12">
+                          <button type="button" class="save-btn float-end ">Save</button>
+                          <button type="button" class="cancel1-btn float-end ">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </td>  
+            </tr>
+
+            <!--comments remarks ends here-->
+
+
+            <tr class="row-bg-style">
+              <td class="spacing2">1235</td>
+              <td class="spacing2">Mani</td>
+              <td class="spacing2">7658783245</td>
+              <td class="spacing2">TN 12 W 3875</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Alpha city</td>
+              <td class="spacing2">Dollar</td>
+              <td class="spacing2">04/04/2021</td>
+              <td class="spacing2">12:00 AM</td>
+              <td class="spacing2">Using Phone While driving</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+            <tr class="row-bg-style">
+              <td class="spacing2">1236</td>
+              <td class="spacing2">Vishwa</td>
+              <td class="spacing2">7658487245</td>
+              <td class="spacing2">TN 12 H 6578</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Bayline</td>
+              <td class="spacing2">AGS</td>
+              <td class="spacing2">04/04/2021</td>
+              <td class="spacing2">3:00 AM</td>
+              <td class="spacing2">Vehicle is not Clean</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+            <tr class="row-bg-style">
+              <td class="spacing2">1237</td>
+              <td class="spacing2">Rubin</td>
+              <td class="spacing2">7658497845</td>
+              <td class="spacing2">TN 12 F 3245</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Alpha city</td>
+              <td class="spacing2">Dollar</td>
+              <td class="spacing2">03/03/2021</td>
+              <td class="spacing2">10:00 PM</td>
+              <td class="spacing2">Inappropriate Dressing</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+            <tr class="row-bg-style">
+              <td class="spacing2">1238</td>
+              <td class="spacing2">Rohith</td>
+              <td class="spacing2">7658673245</td>
+              <td class="spacing2">TN 12 W 7865</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Bayline</td>
+              <td class="spacing2">AGS</td>
+              <td class="spacing2">02/03/2021</td>
+              <td class="spacing2">12:00 AM</td>
+              <td class="spacing2">Using Phone While driving</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+            <tr class="row-bg-style">
+              <td class="spacing2">1239</td>
+              <td class="spacing2">Saro</td>
+              <td class="spacing2">7658893245</td>
+              <td class="spacing2">TN 12 W 1245</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Alpha city</td>
+              <td class="spacing2">Dollar</td>
+              <td class="spacing2">03/03/2021</td>
+              <td class="spacing2">10:00 PM</td>
+              <td class="spacing2">Vehicle is not Clean</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+            <tr class="row-bg-style">
+              <td class="spacing2">1240</td>
+              <td class="spacing2">Ji</td>
+              <td class="spacing2">7758493245</td>
+              <td class="spacing2">TN 12 G 5645</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Alpha city</td>
+              <td class="spacing2">AGS</td>
+              <td class="spacing2">03/03/2021</td>
+              <td class="spacing2">3:30 AM</td>
+              <td class="spacing2">Inappropriate Dressing</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+            <tr class="row-bg-style">
+              <td class="spacing2">1241</td>
+              <td class="spacing2">Nishok</td>
+              <td class="spacing2">8958493245</td>
+              <td class="spacing2">TN 12 H 3255</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Bayline</td>
+              <td class="spacing2">Dollar</td>
+              <td class="spacing2">02/03/2021</td>
+              <td class="spacing2">10:30 PM</td>
+              <td class="spacing2">Using Phone While driving</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+            <tr class="row-bg-style">
+              <td class="spacing2">1242</td>
+              <td class="spacing2">Nish</td>
+              <td class="spacing2">7667493245</td>
+              <td class="spacing2">TN 12 H 3245</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Bayline</td>
+              <td class="spacing2">AGS</td>
+              <td class="spacing2">04/02/2021</td>
+              <td class="spacing2">12:00 AM</td>
+              <td class="spacing2">Vehicle is not Clean</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+            <tr class="row-bg-style">
+              <td class="spacing2">1243</td>
+              <td class="spacing2">Hema</td>
+              <td class="spacing2">7634493245</td>
+              <td class="spacing2">TN 12 W 5678</td>
+              <td class="spacing2">Ravi</td>
+              <td class="spacing2">Alpha city</td>
+              <td class="spacing2">AGS</td>
+              <td class="spacing2">02/02/2021</td>
+              <td class="spacing2">10:00 PM</td>
+              <td class="spacing2">Vehicle is not Clean</td>
+              <td class="spacing2"><a href="#" title="Remarks" class="align-img"><img class="cursor"
+                    src="images/remarks.svg" alt="remarks-icon" /></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--complaints tab ends here-->
+
+
+    <div class="w-100 float-start">
+      <!--total content display starts here-->
+      <div class="header-left py-md-3">
+        <span class="font-records"> Showing Records:</span>
+        <span class="regular">10 out of 170</span>
+      </div>
+      <!--total content display ends here-->
+      <!--Pagination starts here-->
+      <div class="page py-md-3">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link pagination-border" href="#" aria-label="Previous">
+                <img src="Images/pagination-prev-arrow.svg" alt="page-arrow" />
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link pagination-border page-active" href="#">1</a></li>
+            <li class="page-item"><a class="page-link pagination-border" href="#">2</a></li>
+            <li class="page-item"><a class="page-link pagination-border" href="#">3</a></li>
+            <li class="page-item"><a class="page-link pagination-border" href="#">...</a></li>
+            <li class="page-item"><a class="page-link pagination-border" href="#">9</a></li>
+            <li class="page-item"><a class="page-link pagination-border" href="#">10</a></li>
+            <li class="page-item"><a class="page-link pagination-border" href="#">11</a></li>
+            <li class="page-item">
+              <a class="page-link pagination-border" href="#" aria-label="Next">
+                <img src="Images/pagination-next-arrow.svg" alt="page-arrow" />
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!--pagination ends here-->
+    </div>
+  </div>
+  
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+    $('.advanced-filter').click(function (event) {
+      event.stopPropagation();
+
+    });
+    $('#close-filter').click(function () {
+      $('.advanced-filter').removeClass('show');
+    })
+
+  </script>
+
+</body>
+
+</html>
