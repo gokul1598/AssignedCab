@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import java.util.stream.Collectors;
 import java.time.LocalTime;
+import java.util.ArrayList;
 //import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.domain.Page;
@@ -25,12 +27,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.bl.AssignedCabBL;
 import com.example.demo.entity.DestinationBO;
+import com.example.demo.entity.DriverInfo;
 import com.example.demo.entity.SourceBO;
 import com.example.demo.entity.TripCabInfo;
+import com.example.demo.entity.TripDetails;
 //import com.example.demo.repo.AssignedCabRepository;
 //import com.example.demo.repo.DestinationRepository;
 //import com.example.demo.repo.SourceRepository;
 //import com.example.demo.service.AssignedCabService;
+import com.example.demo.repo.DriverInfoRepository;
 
 @RestController
 @RequestMapping(path = "/api/v1")
@@ -40,6 +45,8 @@ public class AssignedCabController {
 	AssignedCabBL bl;
 	@Autowired
 	private MongoTemplate template;
+	@Autowired
+	DriverInfoRepository driverrepo;
 //----------------------------------AssignedCab Method Starts--------------------------------------------------	
 
 // FindAll method--->starts
@@ -87,7 +94,7 @@ public class AssignedCabController {
 
 // Using MongoTemplate for (FilterRequest)  
 	@GetMapping("/filter/{source}/{destination}/{timeSlot}/{skip}/{limit}")
-	public ResponseEntity<List<TripCabInfo>> getByFilterRequest(@PathVariable("source") String source,
+	public ResponseEntity<List<TripDetails>> getByFilterRequest(@PathVariable("source") String source,
 			@PathVariable("destination") String destination, @PathVariable("timeSlot") String timeSlot,
 			@PathVariable("skip") long skip, @PathVariable("limit") int limit) {
 		Query dynamicQuery = new Query();
@@ -101,28 +108,47 @@ public class AssignedCabController {
 
 		}
 		dynamicQuery.limit(limit).skip(skip);
-		List<TripCabInfo> result = template.find(dynamicQuery, TripCabInfo.class, "TripcabInfo");
+		Criteria criteria = Criteria.where("status").is("Ongoing");
+		dynamicQuery.addCriteria(criteria);
+		List<TripCabInfo> result = template.find(dynamicQuery, TripCabInfo.class, "TripcabInfo1");
+		List<TripDetails> details= new ArrayList<>();
+		for(TripCabInfo eachtrip: result) {
+			Optional<DriverInfo> driver=this.driverrepo.findById(eachtrip.getDriverId());
+			DriverInfo drv= driver.get();
+			TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
+		    details.add(trip);
+		}
 		if (!(timeSlot.equals("0"))) {
 
 			LocalTime lt = LocalTime.parse(timeSlot);
-			List<TripCabInfo> timeFilter = result.stream().filter(e -> e.getTimeSlot().equals(lt))
+			List<TripDetails> timeFilter = details.stream().filter(e -> e.getTimeSlot().equals(lt))
 					.collect(Collectors.toList());
+			
 			return ResponseEntity.status(HttpStatus.OK).body(timeFilter);
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(result);
+		return ResponseEntity.status(HttpStatus.OK).body(details);
 
 	}
 
 //---------------------------------------------------------------------------------------   
 // Scroll method with MongoTemplate to Fetch all AssignedCabs-------FindAll
 	@GetMapping(path = "/scroll/{skip}/{limit}")
-	public ResponseEntity<List<TripCabInfo>> getByScroll(@PathVariable("skip") long skip,
+	public ResponseEntity<List<TripDetails>> getByScroll(@PathVariable("skip") long skip,
 			@PathVariable("limit") int limit) {
 		Query query = new Query();
+		Criteria criteria = Criteria.where("status").is("Ongoing");
+		query.addCriteria(criteria);
 		query.limit(limit).skip(skip);
 
-		List<TripCabInfo> cabs = this.template.find(query, TripCabInfo.class, "TripcabInfo");
-		return ResponseEntity.status(HttpStatus.OK).body(cabs);
+		List<TripCabInfo> cabs = this.template.find(query, TripCabInfo.class, "TripcabInfo1");
+		List<TripDetails> details= new ArrayList<>();
+		for(TripCabInfo eachtrip: cabs) {
+			Optional<DriverInfo> driver=this.driverrepo.findById(eachtrip.getDriverId());
+			DriverInfo drv= driver.get();
+			TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
+		    details.add(trip);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(details);
 	}
 
 //---------------------------------------------------------------------------------------
@@ -136,20 +162,57 @@ public class AssignedCabController {
 //--------------------------------------------------------------------------------------
 //Search Method
 	@GetMapping(path = "/{searchValue}/{skip}/{limit}")
-	public ResponseEntity<List<TripCabInfo>> textSearch1(@PathVariable(name = "searchValue") String text,
+	public ResponseEntity<?> textSearch1(@PathVariable(name = "searchValue") String text,
 			@PathVariable("skip") long skip, @PathVariable("limit") int limit) {
 
 		Query query = new Query();
-
-		Criteria c1 = Criteria.where("driverName").regex(text, "i");
-		Criteria c2 = Criteria.where("cabNumber").regex(text, "i");
-
-		Criteria criteria = new Criteria();
-		criteria.orOperator(c1, c2);
-		query.addCriteria(criteria);
-		query.skip(skip).limit(limit);
-		List<TripCabInfo> search = template.find(query, TripCabInfo.class);
-		return ResponseEntity.status(HttpStatus.OK).body(search);
+		Query driverquery = new Query();
+		Query statusquery=new Query();
+		
+		Criteria c = Criteria.where("driverName").regex(text, "i");
+		driverquery.addCriteria(c);
+		List<DriverInfo> drvinfo= template.find(driverquery, DriverInfo.class);
+		Criteria status = Criteria.where("status").is("Ongoing");
+		statusquery.addCriteria(status);
+		List<TripCabInfo> tripcabs= template.find(statusquery, TripCabInfo.class);
+		if(!drvinfo.isEmpty() ) {
+			List<TripCabInfo> trips= new ArrayList<>();
+			for(DriverInfo d: drvinfo) {
+				 trips = tripcabs.stream().filter(e-> e.getDriverId()==(d.getDriverId())).collect(Collectors.toList());
+			}
+			List<TripDetails> details= new ArrayList<>();
+			for(TripCabInfo eachtrip: trips) {
+				Optional<DriverInfo> driver=this.driverrepo.findById(eachtrip.getDriverId());
+				DriverInfo drv= driver.get();
+				TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
+			    details.add(trip);
+			}
+			System.out.println("praksh");
+			return ResponseEntity.status(HttpStatus.OK).body(details);
+	
+		}else {
+			//Criteria c1 = Criteria.where("driverName").regex(text, "i");
+			Criteria c2 = Criteria.where("cabNumber").regex(text, "i");
+			Criteria c3 = Criteria.where("status").is("Ongoing");
+			//Criteria criteria = new Criteria();
+			//criteria.orOperator( c2);
+			query.addCriteria(c2);
+			query.addCriteria(c3);
+			
+			query.skip(skip).limit(limit);
+			List<TripCabInfo> search = template.find(query, TripCabInfo.class);
+			List<TripDetails> details= new ArrayList<>();
+			for(TripCabInfo eachtrip: search) {
+				Optional<DriverInfo> driver=this.driverrepo.findById(eachtrip.getDriverId());
+				DriverInfo drv= driver.get();
+				TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
+			    details.add(trip);
+			}
+			System.out.println("Gokul");
+			return ResponseEntity.status(HttpStatus.OK).body(details);
+			
+		}
+	
 	}
 // Search----> ends.
 
@@ -172,11 +235,11 @@ public class AssignedCabController {
 	}
 
 //find by driverName
-	@GetMapping(path = "/drivername/{driverName}")
-	public ResponseEntity<List<TripCabInfo>> getByDriverName(@PathVariable("driverName") String driverName) {
-		List<TripCabInfo> drivername = this.bl.findByDriverName(driverName);
-		return ResponseEntity.status(HttpStatus.OK).body(drivername);
-	}
+//	@GetMapping(path = "/drivername/{driverName}")
+//	public ResponseEntity<List<TripCabInfo>> getByDriverName(@PathVariable("driverName") String driverName) {
+//		List<TripCabInfo> drivername = this.bl.findByDriverName(driverName);
+//		return ResponseEntity.status(HttpStatus.OK).body(drivername);
+//	}
 
 //---------------------------------------------------------------------------------------------------------------  
 //for cab assigning cab		
@@ -218,5 +281,10 @@ public class AssignedCabController {
 //     
 //      return this.bl.findByFilter(book1);
 //  }	
+	@PostMapping(path = "/driver")
+	public ResponseEntity<DriverInfo> addDriver(@RequestBody DriverInfo driver) {
 
+		DriverInfo drv = this.bl.save(driver);
+		return ResponseEntity.status(HttpStatus.OK).body(drv);
+	}
 }
