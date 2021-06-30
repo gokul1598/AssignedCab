@@ -54,12 +54,11 @@ public class AssignedCabApplication {
 			@Override
 			public void run(String... args) throws Exception {
 			//TripCabInfo info = new TripCabInfo(11, "TN09B6000","VARMA",978870309l,"BaylineInfo-city", "Padur", LocalTime.of(19,30, 00), LocalDate.now());
-				TripCabInfo info = new TripCabInfo(3, "TN09B5770",3, "Alpha-city", "Tambaram", LocalTime.of(19,30, 00), LocalDate.now(),"Reached");
+				TripCabInfo info = new TripCabInfo(14, "TN08960",4, "BaylineInfo-city", "Tambaram", LocalTime.of(00,00, 00), LocalDate.now(),"Ongoing");
 				this.repo.save(info);
-//				DropPointBO drop1 = new DropPointBO(1, "MARINA-MALL");
-//				 DropPointBO drop2 = new DropPointBO(2, "SPICOT");
+//				DropPointBO drop1 = new DropPointBO(1, "AGS");
+//				 DropPointBO drop2 = new DropPointBO(2, "OMR");
 //				 List<DropPointBO> dropPoints = new ArrayList<>();
-	//			dropPoints.addAll(Arrays.asList(drop1,drop2));
 //				 dropPoints.add(drop1);
 //				 dropPoints.add(drop2);
 //				
@@ -67,16 +66,18 @@ public class AssignedCabApplication {
 //				 TimeSlotBO slot2 = new TimeSlotBO(2, LocalTime.of(11,30, 00));
 //				 TimeSlotBO slot3 = new TimeSlotBO(3, LocalTime.of(19,30, 00));
 //				 TimeSlotBO slot4 = new TimeSlotBO(4, LocalTime.of(20,30, 00));
+//				 TimeSlotBO slot5 = new TimeSlotBO(5, LocalTime.of(00,00, 00));
 //				 List<TimeSlotBO> timeSlots = new ArrayList<>();
 //				 timeSlots.add(slot1);
 //				 timeSlots.add(slot2);
 //				 timeSlots.add(slot3);
 //				 timeSlots.add(slot4);
+//				 timeSlots.add(slot5);
 //				 System.out.println("timeslots list  -> "+timeSlots);
-//				 DestinationBO destination = new DestinationBO(1, "Padur",timeSlots,dropPoints);
+//				 DestinationBO destination = new DestinationBO(2, "Tambaram",timeSlots,dropPoints);
 //				 this.repos.save(destination);
 				
-                DriverInfo driver=new DriverInfo(3, "SURESH", 959897389l);
+                DriverInfo driver=new DriverInfo(7, "AADARSH", 959897389l);
                  this.repodrv.save(driver);
 			
 			

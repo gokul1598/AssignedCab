@@ -136,7 +136,10 @@ public class AssignedCabController {
 	public ResponseEntity<List<TripDetails>> getByScroll(@PathVariable("skip") long skip,
 			@PathVariable("limit") int limit) {
 		Query query = new Query();
-		Criteria criteria = Criteria.where("status").is("Ongoing");
+		Criteria criteria1 = Criteria.where("status").is("Ongoing");
+		Criteria criteria2 = Criteria.where("status").is("Assigned");
+		Criteria criteria = new Criteria();
+		criteria.orOperator(criteria1,criteria2);
 		query.addCriteria(criteria);
 		query.limit(limit).skip(skip);
 
@@ -172,8 +175,11 @@ public class AssignedCabController {
 		Criteria c = Criteria.where("driverName").regex(text, "i");
 		driverquery.addCriteria(c);
 		List<DriverInfo> drvinfo= template.find(driverquery, DriverInfo.class);
-		Criteria status = Criteria.where("status").is("Ongoing");
-		statusquery.addCriteria(status);
+		Criteria criteria1 = Criteria.where("status").is("Ongoing");
+		Criteria criteria2 = Criteria.where("status").is("Assigned");
+		Criteria criteria = new Criteria();
+		criteria.orOperator(criteria1,criteria2);
+		statusquery.addCriteria(criteria);
 		List<TripCabInfo> tripcabs= template.find(statusquery, TripCabInfo.class);
 		if(!drvinfo.isEmpty() ) {
 			List<TripCabInfo> trips= new ArrayList<>();
@@ -187,7 +193,7 @@ public class AssignedCabController {
 				TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
 			    details.add(trip);
 			}
-			System.out.println("praksh");
+			
 			return ResponseEntity.status(HttpStatus.OK).body(details);
 	
 		}else {
@@ -208,7 +214,7 @@ public class AssignedCabController {
 				TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
 			    details.add(trip);
 			}
-			System.out.println("Gokul");
+			
 			return ResponseEntity.status(HttpStatus.OK).body(details);
 			
 		}

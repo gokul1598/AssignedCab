@@ -1116,7 +1116,7 @@
 					seconds = splittedTimeSlot[2].split(" ");
 					//alert(Number(splittedTimeSlot[1]));
 					if(Number(splittedTimeSlot[0])+12==24){
-						slot = "00"+":"+Number(splittedTimeSlot[1])+":"+seconds[0];
+						slot = "12"+":"+Number(splittedTimeSlot[1])+":"+seconds[0];
 					}
 					else{
 					splittedTimeSlotHour = Number(splittedTimeSlot[0])+12;
@@ -1124,11 +1124,22 @@
 					}
 					}
 					else{
+						
+	
 					seconds = splittedTimeSlot[2].split(" ");
+					if(Number(splittedTimeSlot[0]==12)){
+						
+						slot="00" +":"+"0"+Number(splittedTimeSlot[1])+":"+seconds[0];
+					   
+						
+					}
 					if(Number(splittedTimeSlot[0])<10){
 						slot = "0"+Number(splittedTimeSlot[0]) +":"+Number(splittedTimeSlot[1])+":"+seconds[0];
 					}
-					else{
+// 					else{
+// 						slot = Number(splittedTimeSlot[0]) +":"+Number(splittedTimeSlot[1])+":"+seconds[0];
+// 					}
+					else if(Number(splittedTimeSlot[0]<=11)){
 						slot = Number(splittedTimeSlot[0]) +":"+Number(splittedTimeSlot[1])+":"+seconds[0];
 					}
 					}
