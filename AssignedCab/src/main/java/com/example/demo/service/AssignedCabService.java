@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -10,10 +12,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.DestinationBO;
+import com.example.demo.entity.DriverInfo;
 import com.example.demo.entity.SourceBO;
 import com.example.demo.entity.TripCabInfo;
 import com.example.demo.repo.AssignedCabRepository;
 import com.example.demo.repo.DestinationRepository;
+import com.example.demo.repo.DriverInfoRepository;
 import com.example.demo.repo.SourceRepository;
 
 
@@ -26,6 +30,8 @@ public class AssignedCabService {
     SourceRepository reposrc;
 	@Autowired
 	DestinationRepository repos;
+	@Autowired
+	DriverInfoRepository repodrv;
 	
 	public TripCabInfo save(TripCabInfo info) {
 		//info.setCabid(repo.count() +1);
@@ -40,14 +46,16 @@ public class AssignedCabService {
 	}
 
 	public Long getCount() {
-		return this.repo.count();
+		List<TripCabInfo> trips= this.repo.findAll().stream().filter(e-> e.getStatus().equals("Ongoing")).collect(Collectors.toList());
+		
+		return (long) trips.size();
 	}
 
 	public List<SourceBO> findSource() {
 		
 		return this.reposrc.findAll();
 	}
-
+ 
 	public List<DestinationBO> findByDestination() {
 		
 		return this.repos.findAll();
@@ -71,10 +79,10 @@ public class AssignedCabService {
 		return this.repo.findByDestination(destination);
 	}
 
-	public List<TripCabInfo> findByDriverName(String driverName) {
-	
-		return this.repo.findByDriverName(driverName);
-	}
+//	public List<TripCabInfo> findByDriverName(String driverName) {
+//	
+//		return this.repo.findByDriverName(driverName);
+//	}
 
 	public List<TripCabInfo> findByFilter(TripCabInfo book1) {
 		
@@ -85,6 +93,13 @@ public class AssignedCabService {
 		
 		return this.repo.findAll(paging);
 	}
+
+	public DriverInfo save(DriverInfo driver) {
+		
+		return this.save(driver);
+	}
+
+	
 
 
 

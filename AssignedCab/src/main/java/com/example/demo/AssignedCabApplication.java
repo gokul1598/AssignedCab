@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -16,12 +17,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.example.demo.entity.DestinationBO;
+import com.example.demo.entity.DriverInfo;
 import com.example.demo.entity.DropPointBO;
 import com.example.demo.entity.TimeSlotBO;
 import com.example.demo.entity.TripCabInfo;
 import com.example.demo.repo.AssignedCabRepository;
 //import com.example.demo.entity.SourceBO;
 import com.example.demo.repo.DestinationRepository;
+import com.example.demo.repo.DriverInfoRepository;
 //import com.example.demo.repo.SourceRepository;
 //import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
@@ -46,13 +49,17 @@ public class AssignedCabApplication {
 			DestinationRepository repos;
 		     @Autowired
 		     AssignedCabRepository repo;
+		     @Autowired
+		     DriverInfoRepository repodrv;
 			@Override
 			public void run(String... args) throws Exception {
-//			TripCabInfo info = new TripCabInfo(11, "TN09B6000","VARMA",978870309l,"BaylineInfo-city", "Padur", LocalTime.of(19,30, 00), LocalDate.now());
-//                 this.repo.save(info);
+			//TripCabInfo info = new TripCabInfo(11, "TN09B6000","VARMA",978870309l,"BaylineInfo-city", "Padur", LocalTime.of(19,30, 00), LocalDate.now());
+				TripCabInfo info = new TripCabInfo(3, "TN09B5770",3, "Alpha-city", "Tambaram", LocalTime.of(19,30, 00), LocalDate.now(),"Reached");
+				this.repo.save(info);
 //				DropPointBO drop1 = new DropPointBO(1, "MARINA-MALL");
 //				 DropPointBO drop2 = new DropPointBO(2, "SPICOT");
 //				 List<DropPointBO> dropPoints = new ArrayList<>();
+	//			dropPoints.addAll(Arrays.asList(drop1,drop2));
 //				 dropPoints.add(drop1);
 //				 dropPoints.add(drop2);
 //				
@@ -69,8 +76,8 @@ public class AssignedCabApplication {
 //				 DestinationBO destination = new DestinationBO(1, "Padur",timeSlots,dropPoints);
 //				 this.repos.save(destination);
 				
-
-
+                DriverInfo driver=new DriverInfo(3, "SURESH", 959897389l);
+                 this.repodrv.save(driver);
 			
 			
 			}

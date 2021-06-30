@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.entity.DestinationBO;
+import com.example.demo.entity.DriverInfo;
 import com.example.demo.entity.SourceBO;
 import com.example.demo.entity.TripCabInfo;
 import com.example.demo.service.AssignedCabService;
@@ -61,9 +62,14 @@ public class AssignedCabBL {
 		return this.service.findByDestination(destination);
 	}
 
-	public List<TripCabInfo> findByDriverName(String driverName) {
+//	public List<TripCabInfo> findByDriverName(String driverName) {
+//
+//		return this.service.findByDriverName(driverName);
+//	}
 
-		return this.service.findByDriverName(driverName);
+	public DriverInfo save(DriverInfo driver) {
+		
+		return this.service.save(driver);
 	}
 
 }

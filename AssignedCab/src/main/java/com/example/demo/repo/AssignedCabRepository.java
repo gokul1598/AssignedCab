@@ -14,7 +14,7 @@ public interface AssignedCabRepository extends MongoRepository<TripCabInfo ,Inte
 
 	List<TripCabInfo> findByDestination(String destination);
 
-	List<TripCabInfo> findByDriverName(String driverName);
+	//List<TripCabInfo> findByDriverName(String driverName);
 
 	
 

@@ -14,17 +14,19 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection="TripcabInfo")
+@Document(collection="TripcabInfo1")
 public class TripCabInfo {
   @Id
   private  int cabid;
   private String cabNumber;
-  private String driverName;
-  private long driverNumber;
+   long driverId;
+//  private String driverName;
+//  private long driverNumber;
   private String source;
   private String destination;
   private LocalTime timeSlot;
   private LocalDate date;
+  private String status;
  
 //public TripCabInfo(String cabNumber, String driverName, long driverNumber, String source, String destination,
 //		String timeSlot) {
