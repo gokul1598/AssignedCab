@@ -46,9 +46,9 @@ public class AssignedCabService {
 	}
 
 	public Long getCount() {
-		List<TripCabInfo> trips= this.repo.findAll().stream().filter(e-> e.getStatus().equals("Ongoing")|| e.getStatus().equals("Assigned")).collect(Collectors.toList());
+		List<TripCabInfo> tripcount= this.repo.findAll().stream().filter(e-> e.getStatus().equals("Ongoing")|| e.getStatus().equals("Assigned")).collect(Collectors.toList());
 		
-		return (long) trips.size();
+		return (long) tripcount.size();
 	}
 
 	public List<SourceBO> findSource() {

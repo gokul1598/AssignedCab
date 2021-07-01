@@ -108,10 +108,10 @@ public class AssignedCabController {
 
 		}
 		dynamicQuery.limit(limit).skip(skip);
-		Criteria criteria = Criteria.where("status").is("Ongoing");
-		Criteria criteria1= Criteria.where("status").is("Assigned");
-		dynamicQuery.addCriteria(criteria);
+		Criteria criteria1 = Criteria.where("status").is("Ongoing");
+		Criteria criteria2= Criteria.where("status").is("Assigned");
 		dynamicQuery.addCriteria(criteria1);
+		dynamicQuery.addCriteria(criteria2);
 		List<TripCabInfo> result = template.find(dynamicQuery, TripCabInfo.class, "TripcabInfo1");
 		List<TripDetails> details= new ArrayList<>();
 		for(TripCabInfo eachtrip: result) {
