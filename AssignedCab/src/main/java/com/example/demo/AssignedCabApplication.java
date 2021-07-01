@@ -54,7 +54,7 @@ public class AssignedCabApplication {
 			@Override
 			public void run(String... args) throws Exception {
 			//TripCabInfo info = new TripCabInfo(11, "TN09B6000","VARMA",978870309l,"BaylineInfo-city", "Padur", LocalTime.of(19,30, 00), LocalDate.now());
-				TripCabInfo info = new TripCabInfo(14, "TN08960",4, "BaylineInfo-city", "Tambaram", LocalTime.of(00,00, 00), LocalDate.now(),"Ongoing");
+				TripCabInfo info = new TripCabInfo(15, "TN0C9900",5, "Alpha-city", "Padur", LocalTime.of(11,30, 00), LocalDate.now(),"Assigned");
 				this.repo.save(info);
 //				DropPointBO drop1 = new DropPointBO(1, "AGS");
 //				 DropPointBO drop2 = new DropPointBO(2, "OMR");
@@ -76,9 +76,9 @@ public class AssignedCabApplication {
 //				 System.out.println("timeslots list  -> "+timeSlots);
 //				 DestinationBO destination = new DestinationBO(2, "Tambaram",timeSlots,dropPoints);
 //				 this.repos.save(destination);
-				
-                DriverInfo driver=new DriverInfo(7, "AADARSH", 959897389l);
-                 this.repodrv.save(driver);
+//				
+//                DriverInfo driver=new DriverInfo(7, "AADARSH", 959897389l);
+//                 this.repodrv.save(driver);
 			
 			
 			}
