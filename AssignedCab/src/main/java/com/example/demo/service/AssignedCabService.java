@@ -163,10 +163,11 @@ public class AssignedCabService {
 			//Criteria c1 = Criteria.where("driverName").regex(text, "i");
 			Criteria c2 = Criteria.where("cabNumber").regex(text, "i");
 			Criteria c3 = Criteria.where("status").is("Ongoing");
-			//Criteria criteria = new Criteria();
-			//criteria.orOperator( c2);
+			Criteria c4 = Criteria.where("status").is("Assigned");
+			Criteria c1 = new Criteria();
+		     c1.orOperator( c3,c4);
 			query.addCriteria(c2);
-			query.addCriteria(c3);
+			query.addCriteria(c1);
 			
 			query.skip(skip).limit(limit);
 			List<TripCabInfo> search = template.find(query, TripCabInfo.class);
