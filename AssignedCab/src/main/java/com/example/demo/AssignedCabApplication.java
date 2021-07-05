@@ -53,8 +53,8 @@ public class AssignedCabApplication {
 		     DriverInfoRepository repodrv;
 			@Override
 			public void run(String... args) throws Exception {
-			//TripCabInfo info = new TripCabInfo(11, "TN09B6000","VARMA",978870309l,"BaylineInfo-city", "Padur", LocalTime.of(19,30, 00), LocalDate.now());
-				TripCabInfo info = new TripCabInfo(15, "TN0C9900",5, "Alpha-city", "Padur", LocalTime.of(11,30, 00), LocalDate.now(),"Assigned");
+			//TripCabInfo info = new TripCabInfo(11, "TN09B6000","VARMA",978870309l,"BaylineInfo-city", "Padur", LocalTime.of(11,30, 00), LocalDate.now());
+				TripCabInfo info = new TripCabInfo(16, "TN0C9900",5, "Alpha-city", "Tambaram", LocalTime.of(11,30, 00), LocalDate.now(),"Reached");
 				this.repo.save(info);
 //				DropPointBO drop1 = new DropPointBO(1, "AGS");
 //				 DropPointBO drop2 = new DropPointBO(2, "OMR");

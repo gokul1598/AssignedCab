@@ -97,62 +97,17 @@ public class AssignedCabController {
 	public ResponseEntity<List<TripDetails>> getByFilterRequest(@PathVariable("source") String source,
 			@PathVariable("destination") String destination, @PathVariable("timeSlot") String timeSlot,
 			@PathVariable("skip") long skip, @PathVariable("limit") int limit) {
-		Query dynamicQuery = new Query();
-		if (!(source.equals("0"))) {
-			Criteria sourceCriteria = Criteria.where("source").is(source);
-			dynamicQuery.addCriteria(sourceCriteria);
-		}
-		if (!(destination.equals("0"))) {
-			Criteria destinationCriteria = Criteria.where("destination").is(destination);
-			dynamicQuery.addCriteria(destinationCriteria);
-
-		}
-		dynamicQuery.limit(limit).skip(skip);
-		Criteria criteria1 = Criteria.where("status").is("Ongoing");
-		Criteria criteria2= Criteria.where("status").is("Assigned");
-		dynamicQuery.addCriteria(criteria1);
-		dynamicQuery.addCriteria(criteria2);
-		List<TripCabInfo> result = template.find(dynamicQuery, TripCabInfo.class, "TripcabInfo1");
-		List<TripDetails> details= new ArrayList<>();
-		for(TripCabInfo eachtrip: result) {
-			Optional<DriverInfo> driver=this.driverrepo.findById(eachtrip.getDriverId());
-			DriverInfo drv= driver.get();
-			TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
-		    details.add(trip);
-		}
-		if (!(timeSlot.equals("0"))) {
-
-			LocalTime lt = LocalTime.parse(timeSlot);
-			List<TripDetails> timeFilter = details.stream().filter(e -> e.getTimeSlot().equals(lt))
-					.collect(Collectors.toList());
-			
-			return ResponseEntity.status(HttpStatus.OK).body(timeFilter);
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(details);
-
+	
+     List<TripDetails> details= this.bl.getByFilter(source,destination,timeSlot,skip,limit);
+     return ResponseEntity.status(HttpStatus.OK).body(details); 
 	}
 
 //---------------------------------------------------------------------------------------   
 // Scroll method with MongoTemplate to Fetch all AssignedCabs-------FindAll
 	@GetMapping(path = "/scroll/{skip}/{limit}")
-	public ResponseEntity<List<TripDetails>> getByScroll(@PathVariable("skip") long skip,
+	public ResponseEntity<List<TripDetails>> getAssignedCabByScroll(@PathVariable("skip") long skip,
 			@PathVariable("limit") int limit) {
-		Query query = new Query();
-		Criteria criteria1 = Criteria.where("status").is("Ongoing");
-		Criteria criteria2 = Criteria.where("status").is("Assigned");
-		Criteria criteria = new Criteria();
-		criteria.orOperator(criteria1,criteria2);
-		query.addCriteria(criteria);
-		query.limit(limit).skip(skip);
-
-		List<TripCabInfo> cabs = this.template.find(query, TripCabInfo.class, "TripcabInfo1");
-		List<TripDetails> details= new ArrayList<>();
-		for(TripCabInfo eachtrip: cabs) {
-			Optional<DriverInfo> driver=this.driverrepo.findById(eachtrip.getDriverId());
-			DriverInfo drv= driver.get();
-			TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
-		    details.add(trip);
-		}
+		List<TripDetails> details= this.bl.getAssignedCabByScroll(skip,limit);
 		return ResponseEntity.status(HttpStatus.OK).body(details);
 	}
 
@@ -167,59 +122,11 @@ public class AssignedCabController {
 //--------------------------------------------------------------------------------------
 //Search Method
 	@GetMapping(path = "/{searchValue}/{skip}/{limit}")
-	public ResponseEntity<?> textSearch1(@PathVariable(name = "searchValue") String text,
+	public ResponseEntity<?> getByTextSearch(@PathVariable(name = "searchValue") String text,
 			@PathVariable("skip") long skip, @PathVariable("limit") int limit) {
 
-		Query query = new Query();
-		Query driverquery = new Query();
-		Query statusquery=new Query();
-		
-		Criteria c = Criteria.where("driverName").regex(text, "i");
-		driverquery.addCriteria(c);
-		List<DriverInfo> drvinfo= template.find(driverquery, DriverInfo.class);
-		Criteria criteria1 = Criteria.where("status").is("Ongoing");
-		Criteria criteria2 = Criteria.where("status").is("Assigned");
-		Criteria criteria = new Criteria();
-		criteria.orOperator(criteria1,criteria2);
-		statusquery.addCriteria(criteria);
-		List<TripCabInfo> tripcabs= template.find(statusquery, TripCabInfo.class);
-		if(!drvinfo.isEmpty() ) {
-			List<TripCabInfo> trips= new ArrayList<>();
-			for(DriverInfo d: drvinfo) {
-				 trips = tripcabs.stream().filter(e-> e.getDriverId()==(d.getDriverId())).collect(Collectors.toList());
-			}
-			List<TripDetails> details= new ArrayList<>();
-			for(TripCabInfo eachtrip: trips) {
-				Optional<DriverInfo> driver=this.driverrepo.findById(eachtrip.getDriverId());
-				DriverInfo drv= driver.get();
-				TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
-			    details.add(trip);
-			}
-			
-			return ResponseEntity.status(HttpStatus.OK).body(details);
-	
-		}else {
-			//Criteria c1 = Criteria.where("driverName").regex(text, "i");
-			Criteria c2 = Criteria.where("cabNumber").regex(text, "i");
-			Criteria c3 = Criteria.where("status").is("Ongoing");
-			//Criteria criteria = new Criteria();
-			//criteria.orOperator( c2);
-			query.addCriteria(c2);
-			query.addCriteria(c3);
-			
-			query.skip(skip).limit(limit);
-			List<TripCabInfo> search = template.find(query, TripCabInfo.class);
-			List<TripDetails> details= new ArrayList<>();
-			for(TripCabInfo eachtrip: search) {
-				Optional<DriverInfo> driver=this.driverrepo.findById(eachtrip.getDriverId());
-				DriverInfo drv= driver.get();
-				TripDetails trip=new TripDetails(eachtrip.getCabid(), eachtrip.getCabNumber() , drv, eachtrip.getSource() , eachtrip.getDestination() , eachtrip.getTimeSlot(), eachtrip.getDate(), eachtrip.getStatus());
-			    details.add(trip);
-			}
-			
-			return ResponseEntity.status(HttpStatus.OK).body(details);
-			
-		}
+    List<TripDetails> details= this.bl.getByTextSearch(text,skip,limit);
+    return ResponseEntity.status(HttpStatus.OK).body(details);
 	
 	}
 // Search----> ends.

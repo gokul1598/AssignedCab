@@ -9,6 +9,7 @@ import com.example.demo.entity.DestinationBO;
 import com.example.demo.entity.DriverInfo;
 import com.example.demo.entity.SourceBO;
 import com.example.demo.entity.TripCabInfo;
+import com.example.demo.entity.TripDetails;
 import com.example.demo.service.AssignedCabService;
 
 @Component
@@ -40,7 +41,20 @@ public class AssignedCabBL {
 
 		return this.service.getCount();
 	}
+	public List<TripDetails> getAssignedCabByScroll(long skip, int limit) {
+		
+		return this.service.getAssignedCabByScroll(skip,limit);
+	}
 
+	public List<TripDetails> getByFilter(String source, String destination, String timeSlot, long skip, int limit) {
+		
+		return this.service.getByFilter(source,destination,timeSlot,skip,limit);
+	}
+
+	public List<TripDetails> getByTextSearch(String text, long skip, int limit) {
+		
+		return this.service.getBySearch(text,skip,limit);
+	}
 //-----------------------------------------Testing Purpose-----------------------------------------------------------
 	public SourceBO save(SourceBO source) {
 
@@ -71,5 +85,7 @@ public class AssignedCabBL {
 		
 		return this.service.save(driver);
 	}
+
+
 
 }
