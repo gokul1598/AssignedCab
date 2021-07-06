@@ -101,13 +101,22 @@ public class AssignedCabController {
      List<TripDetails> details= this.bl.getByFilter(source,destination,timeSlot,skip,limit);
      return ResponseEntity.status(HttpStatus.OK).body(details); 
 	}
-
+//	@GetMapping("/filter/{source}/{destination}/{timeSlot}/{skip}/{limit}")
+//	public ResponseEntity<List<TripCabInfo>> getByFilterRequest(@PathVariable("source") String source,
+//			@PathVariable("destination") String destination, @PathVariable("timeSlot") String timeSlot,
+//			@PathVariable("skip") long skip, @PathVariable("limit") int limit) {
+//	
+//     List<TripCabInfo> details= this.bl.getByFilter(source,destination,timeSlot,skip,limit);
+//     return ResponseEntity.status(HttpStatus.OK).body(details); 
+//	}
 //---------------------------------------------------------------------------------------   
 // Scroll method with MongoTemplate to Fetch all AssignedCabs-------FindAll
 	@GetMapping(path = "/scroll/{skip}/{limit}")
 	public ResponseEntity<List<TripDetails>> getAssignedCabByScroll(@PathVariable("skip") long skip,
 			@PathVariable("limit") int limit) {
+		//System.out.println("scroll method called");
 		List<TripDetails> details= this.bl.getAssignedCabByScroll(skip,limit);
+		//System.out.println(details);
 		return ResponseEntity.status(HttpStatus.OK).body(details);
 	}
 

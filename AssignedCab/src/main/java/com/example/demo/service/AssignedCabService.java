@@ -18,6 +18,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.entity.DestinationBO;
 import com.example.demo.entity.DriverInfo;
@@ -91,7 +93,7 @@ public class AssignedCabService {
 		return details;
 	}
 
-	public List<TripDetails> getByFilter(String source, String destination, String timeSlot, long skip, int limit) {
+  public List<TripDetails> getByFilter(String source, String destination, String timeSlot, long skip, int limit) {
 		Query dynamicQuery = new Query();
 		if (!(source.equals("0"))) {
 			Criteria sourceCriteria = Criteria.where("source").is(source);
@@ -128,6 +130,55 @@ public class AssignedCabService {
 		return details;
 		
 	}
+
+//      @GetMapping("/filter/{source}/{destination}/{timeSlot}/{skip}/{limit}")
+//	       public List<TripCabInfo> getByFilter(@PathVariable("source") String source,@PathVariable("destination") String destination,@PathVariable("timeSlot") String timeSlot,@PathVariable("skip") long skip,@PathVariable("limit") int limit){
+//	           Query dynamicQuery = new Query();
+//	           if (!(source.equals("0")))
+//	           {
+//	              Criteria sourceCriteria = Criteria.where("source").is(source);
+//	              dynamicQuery.addCriteria(sourceCriteria);
+//	           }
+//	           if (!(destination.equals("0")))
+//	           {
+//	              Criteria destinationCriteria =     Criteria.where("destination").is(destination);
+//	              dynamicQuery.addCriteria(destinationCriteria);
+//	           }
+//	          
+//	          
+//	           Criteria criteria = Criteria.where("status").is("booked");
+//	            dynamicQuery.addCriteria(criteria);
+//	          
+//	           
+//	          
+//	        //   List<BookingRequestBO> result1=result.stream().skip(skip).limit(limit).collect(Collectors.toList());
+//	          
+//	         
+//	          
+//	          
+//	           if (!(timeSlot.equals("0")))
+//	           {
+////	               LocalTime lt=LocalTime.parse(timeSlot);
+////	               List<BookingRequestBO> timeFilter= result.stream().filter(e->e.getTimeSlot().equals(lt)).collect(Collectors.toList());
+////	            //   List<BookingRequestBO> timeFilter1=timeFilter.stream().skip(skip).limit(limit).collect(Collectors.toList());
+////	               return timeFilter;
+//	              
+//	               String splittedTimeSlot[] = timeSlot.split(":"); //System.out.println(timeSlot);
+//	              // System.out.println(splittedTimeSlot[0]);
+//	               Criteria timeSlotCriteria =     Criteria.where("timeSlot").is(LocalTime.of(Integer.parseInt(splittedTimeSlot[0]), Integer.parseInt(splittedTimeSlot[1]), Integer.parseInt(splittedTimeSlot[2])));
+//	               
+//	                  dynamicQuery.addCriteria(timeSlotCriteria);
+//	              
+//	           }
+//	          
+//	           dynamicQuery.limit(limit).skip(skip);
+//	          
+//	           List<TripCabInfo> result=this.template.find(dynamicQuery, TripCabInfo.class,"TripCabInfo1");
+//	          
+//	          // System.out.println(result.size());
+//	          return result;
+//	       }
+	
 
 	public List<TripDetails> getBySearch(String text, long skip, int limit) {
 		

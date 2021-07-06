@@ -830,12 +830,16 @@
     var xhr = new XMLHttpRequest();
     var skip=0; 
     var limit=10;
+    var searchApplied= false;
+    var filterApplied =false;
     var submitBtn2 = document.getElementById("pills-assignedcabs-tab");  // AssignedCab NavId
         submitBtn2.addEventListener('click',function(){
         	document.getElementById("Destination").selectedIndex=0;  // Clear the filter
         	document.getElementById("Source").selectedIndex=0;
         	document.getElementById("timeslot").selectedIndex=0;
         	filterApplied=false;
+        	var filter=document.getElementById("filterbtn");
+            filter.setAttribute('src','images/Vector.svg');
         	$("#cab-body").empty();
         	skip=0;
         	getAssignedCabs(skip,limit);
@@ -847,6 +851,8 @@
     	document.getElementById("Source").selectedIndex=0;
     	document.getElementById("timeslot").selectedIndex=0;
     	filterApplied=false;
+    	var filter=document.getElementById("filterbtn");
+        filter.setAttribute('src','images/Vector.svg');
     	$("#cab-body").empty();
     	skip=0;
     	getAssignedCabs(skip,limit);
@@ -857,6 +863,7 @@
     	//Path get all assignedCabs
           //xhr.open("GET","http://localhost:5050/api/v1/assignedCab/cabs",true);
        // path get all assignedCabs with Scrollevent
+       
     	  xhr.open("GET","http://localhost:5050/api/v1/scroll/"+skip+"/"+limit,true);
           xhr.onreadystatechange=processResponse2;
           xhr.send(null);
@@ -1098,12 +1105,20 @@
 		
 //ApplyFilter---------------------> starts                                  -ApplyButtonClicked
 		var xhrFilter = new XMLHttpRequest();
-		document.getElementById('applybtn').addEventListener('click',getApplyFilter);
-		var filterApplied =false;
+		document.getElementById('applybtn').addEventListener('click',function(){
+			
+			skip=0;
+			filterApplied=true;
+			$("#cab-body").empty();
+			changeFilter();
+			getApplyFilter();
+			});
+		
+		
+		
 		function getApplyFilter(){
 			
-		    skip=0;
-			filterApplied=true;
+		    
 			event.preventDefault();
             
 					var des = document.querySelector('#Destination').value;
@@ -1159,7 +1174,7 @@
 				
 				
                // if(filterApplied==true){
-				$("#cab-body").empty();
+				//$("#cab-body").empty();
                // }
 				var arr = JSON.parse(xhrFilter.responseText);
 				//   alert(arr.length);
@@ -1241,18 +1256,31 @@
 		document.getElementById("scroll").addEventListener(
 				'scroll',
 				function() {
-					if ($("#scroll").scrollTop() + $("#scroll").height() > $(
-							"#cab-body").height()) {
+					
+				    //alert('scroll alert');
+// 				   ($("#scroll").scrollTop() + $("#scroll").height() > $(
+// 					"#cab-body").height())
+//($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height()) 
+					if ($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height())   {
+						if($('#cab-body tr').length != count){
 						skip = skip + limit;
 						if(filterApplied==false){
 						getAssignedCabs(skip, limit);
-						}else{
+						}else if(searchApplied==true){
+							
+						    getBySearch()
+							}else{
+						
 							getApplyFilter();
 						 
-							filterApplied =false;
+							//filterApplied =false;
 						}
 					}
-
+					else{
+						skip=0;
+					
+					}
+					}
 				});
 //-----> scroll ends 
 
@@ -1266,17 +1294,26 @@
  document.getElementById("searchtab").addEventListener("keyup", function (event) {
     		
              if (event.keyCode == 13) {
+            	 var filter=document.getElementById("filterbtn");
+                 filter.setAttribute('src','images/Vector.svg');
+                 filterApplied= false;
+                 searchApplied = true;
+                 skip=0;
             	 getBySearch();
              }
          });
  // enter button ---ends
      function getBySearch(){
-    	 
-     
+    	 filterApplied= false;
+         searchApplied = true;
+        skip=0;
+        var filter=document.getElementById("filterbtn");
+        filter.setAttribute('src','images/Vector.svg');
     	 var searchtxt=document.getElementById("searchtab").value.trim();
     	 
     	 if(searchtxt==null || searchtxt=="" || searchtxt== undefined){
-    		 
+    		 searchApplied = false;
+    	        skip=0;
     		 $("#cab-body").empty();
     		getAssignedCabs(skip,limit); 
     	 }
@@ -1372,8 +1409,31 @@
          
              }
         
-//search---------------------------------->ends   
-    }   
+//search---------------------------------->ends  
+
+    } 
+    function changeFilter()
+    {
+
+     
+
+    //alert("2");
+    var filter=document.getElementById("filterbtn");
+    if(document.getElementById("Destination").selectedIndex!=0 || document.getElementById("Source").selectedIndex!=0)
+    {
+        //alert("1");
+        filter.setAttribute('src','images/VectorFil1.svg');
+        
+    }
+    else
+    {
+        filter.setAttribute('src','images/Vector.svg');
+    }
+
+     
+
+
+    }
 	</script>
 </body>
 </html>

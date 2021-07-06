@@ -86,6 +86,11 @@ public class AssignedCabBL {
 		return this.service.save(driver);
 	}
 
+//	public List<TripCabInfo> getByFilter(String source, String destination, String timeSlot, long skip, int limit) {
+//		
+//		return this.service.getByFilter(source, destination, timeSlot, skip, limit);
+//	}
+
 
 
 }
