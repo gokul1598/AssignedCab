@@ -902,6 +902,7 @@
  	  // creating row and data   
         var trow=document.createElement('tr');
         trow.className="row-bg-style";       // addingStyle class
+        trow.id=i;
         var divObj = document.createElement('td');
         divObj.className="spacing";
         var divObj1 = document.createElement('td');
@@ -918,7 +919,9 @@
         divObj6.className="spacing";
         var divObj7 = document.createElement('td');
         divObj7.className="spacing";
-        
+        var divObj8 = document.createElement('td');
+        divObj8.className="spacing";
+        divObj8.style.display="none";
         
         divObj.innerText = arr[i].cabNumber ;
         divObj1.innerText = arr[i].driver.driverName;
@@ -951,8 +954,8 @@
         }
         }
         
-        divObj7.innerHTML="<a href='tripsheet.html' title='View' class='align-img'><img src='images/View.svg' alt='View-icon' /></a>";
-         
+        divObj7.innerHTML="<a onclick='actionBtn(this)' title='View' class='align-img'  ><img src='images/View.svg' alt='View-icon' /></a>";
+        divObj8.innerText= arr[i].cabid; 
         
         trow.appendChild(divObj);
         trow.appendChild(divObj1);
@@ -962,7 +965,7 @@
         trow.appendChild(divObj5);
         trow.appendChild(divObj6);
         trow.appendChild(divObj7);
-        
+        trow.appendChild(divObj8);
         document.getElementById("cab-body").appendChild(trow);
 //record--> to get rowcount  
 
@@ -1257,10 +1260,10 @@
 				'scroll',
 				function() {
 					
-				    //alert('scroll alert');
+
 // 				   ($("#scroll").scrollTop() + $("#scroll").height() > $(
 // 					"#cab-body").height())
-//($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height()) 
+//                 ($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height()) 
 					if ($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height())   {
 						if($('#cab-body tr').length != count){
 						skip = skip + limit;
@@ -1352,6 +1355,9 @@
          divObj6.className="spacing";
          var divObj7 = document.createElement('td');
          divObj7.className="spacing";
+         var divObj8 = document.createElement('td');
+         divObj8.className="spacing";
+         divObj8.style.display="none";
          
          
          divObj.innerText = arr[i].cabNumber ;
@@ -1385,8 +1391,8 @@
          }
          }
          
-         divObj7.innerHTML="<a href='tripsheet.html' title='View' class='align-img'><img src='images/View.svg' alt='View-icon' /></a>";
-          
+         divObj7.innerHTML="<a onclick='actionBtn(this)' title='View' class='align-img'><img src='images/View.svg' alt='View-icon' /></a>";
+          divObj8.innerText=arr[i].cabid;
          
          trow.appendChild(divObj);
          trow.appendChild(divObj1);
@@ -1396,7 +1402,7 @@
          trow.appendChild(divObj5);
          trow.appendChild(divObj6);
          trow.appendChild(divObj7);
-         
+         trow.appendChild(divObj8);
          document.getElementById("cab-body").appendChild(trow);
  //record--> to get rowcount  
 
@@ -1412,6 +1418,7 @@
 //search---------------------------------->ends  
 
     } 
+//--> Filter icon    
     function changeFilter()
     {
 
@@ -1429,11 +1436,16 @@
     {
         filter.setAttribute('src','images/Vector.svg');
     }
-
-     
-
-
-    }
+}
+//-->actionbtn clickedd
+function actionBtn(obj){
+	
+     var tr= obj.closest("tr").id;
+     alert(tr);
+   var action=  document.getElementById(tr).cells[8].innerText;
+	 window.location.href="tripsheet.html?tripcabId="+action;
+}
+//--->actionbtn ends
 	</script>
 </body>
 </html>
