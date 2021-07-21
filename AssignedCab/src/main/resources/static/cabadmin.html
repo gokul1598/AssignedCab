@@ -888,7 +888,7 @@
           getTotalCount();                                        // Function to Call Total Records
     
           
-          
+     var counttr=0;     
 //Function to display all AssignedCabs -->ProcessResponse2  
    function processResponse2(){
     	  event.preventDefault();
@@ -902,7 +902,7 @@
  	  // creating row and data   
         var trow=document.createElement('tr');
         trow.className="row-bg-style";       // addingStyle class
-        trow.id=i;
+        trow.id=counttr++;
         var divObj = document.createElement('td');
         divObj.className="spacing";
         var divObj1 = document.createElement('td');
@@ -1186,6 +1186,7 @@
 					// creating row and data   
 					var trow = document.createElement('tr');
 					trow.className = "row-bg-style"; // addingStyle class
+					trow.id = counttr++;
 					var divObj = document.createElement('td');
 					divObj.className = "spacing";
 					var divObj1 = document.createElement('td');
@@ -1202,6 +1203,9 @@
 					divObj6.className = "spacing";
 					var divObj7 = document.createElement('td');
 					divObj7.className = "spacing";
+					var divObj8 = document.createElement('td');
+				        divObj8.className="spacing";
+				        divObj8.style.display="none";
 
 					divObj.innerText = arr[i].cabNumber;
 					divObj1.innerText = arr[i].driver.driverName;
@@ -1233,7 +1237,7 @@
 			        }
 			        }
 					divObj7.innerHTML = "<a href='tripsheet.html' title='View' class='align-img'><img src='images/View.svg' alt='View-icon' /></a>";
-
+                     divObj8.innerHTML= arr[i].cabid;
 					trow.appendChild(divObj);
 					trow.appendChild(divObj1);
 					trow.appendChild(divObj2);
@@ -1242,7 +1246,7 @@
 					trow.appendChild(divObj5);
 					trow.appendChild(divObj6);
 					trow.appendChild(divObj7);
-
+                    trow.appendChild(divObj8);
 					document.getElementById("cab-body").appendChild(trow);
            // To Count the data based on Row
 					var countSpan = document.getElementById("count");
@@ -1339,6 +1343,7 @@
   	  // creating row and data   
          var trow=document.createElement('tr');
          trow.className="row-bg-style";       // addingStyle class
+         trow.id = counttr++;
          var divObj = document.createElement('td');
          divObj.className="spacing";
          var divObj1 = document.createElement('td');
@@ -1443,6 +1448,7 @@ function actionBtn(obj){
      var tr= obj.closest("tr").id;
      alert(tr);
    var action=  document.getElementById(tr).cells[8].innerText;
+   alert(action);
 	 window.location.href="tripsheet.html?tripcabId="+action;
 }
 //--->actionbtn ends
